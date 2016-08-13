@@ -1,0 +1,3 @@
+hi,i'm dup in test2
+hi,i'm not dup
+hi,i'm dup in test2

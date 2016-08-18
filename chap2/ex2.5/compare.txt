@@ -1,0 +1,6 @@
+运行go test -bench=. 得到运行结果:
+
+BenchmarkPopCount-8         200000000            5.94 ns/op
+BenchmarkPopCountRewrite3-8  300000000           4.51 ns/op
+
+结论：PopCount()每次调用平均用时5.94ns, PopCountRewrite3()每次调用平均用时4.51ns,重写后性能更好

@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	width, height = 600, 320            // canvas size in pixels
+	width, height = 1800, 960           // canvas size in pixels
 	cells         = 100                 // number of grid cells
 	xyrange       = 30.0                // axis ranges (-xyrange..+xyrange)
 	xyscale       = width / 2 / xyrange // pixels per x or y unit
@@ -39,7 +39,7 @@ func corner(i, j int) (float64, float64) {
 	y := xyrange * (float64(j)/cells - 0.5)
 
 	// Compute surface height z.
-	z := f(x, y)
+	z, _ := f(x, y)
 
 	// Project (x,y,z) isometrically onto 2-D SVG canvas (sx,sy).
 	sx := width/2 + (x-y)*cos30*xyscale
@@ -47,11 +47,11 @@ func corner(i, j int) (float64, float64) {
 	return sx, sy
 }
 
-func f(x, y float64) float64 {
+func f(x, y float64) (float64, bool) {
 	r := math.Hypot(x, y) // distance from (0,0)
 	if math.IsNaN(r) || math.IsInf(r, 0) {
-		return 0
+		return 0, false
 	}
-	return math.Sin(r) / r
+	return math.Sin(r) / r, true
 
 }
